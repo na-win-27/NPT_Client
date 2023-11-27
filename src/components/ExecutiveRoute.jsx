@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 
 export default function ExecutiveRoute({
   children,}) {
-const user=useSelector((state) =>state.user.user)
+const user=useSelector((state) =>state.user)
 
 
 
-if(!user){
+if(!user.isAuthenticated && user.loading){
   return <Navigate to="/login"  />;
 }
 

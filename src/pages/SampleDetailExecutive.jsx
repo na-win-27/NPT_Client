@@ -1,5 +1,5 @@
 import React from "react";
-import { getSampleById } from "../redux/actions/sample.js";
+import { getSampleById,sampleDelivered } from "../redux/actions/sample.js";
 import Store from "../redux/store";
 import { useSelector } from "react-redux";
 import _ from "underscore";
@@ -11,7 +11,7 @@ import Collapse from "@mui/material/Collapse";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import SampleHangerCard from "../components/SampleHangerCard.jsx";
 import FlexBetween from "../components/FlexBetween.jsx";
 import Modal from "@mui/material/Modal";
@@ -43,6 +43,7 @@ const ExpandMore = styled((props) => {
 }));
 
 const SampleDetailExecutive = () => {
+  const navigate=useNavigate();
   const theme = useTheme();
   const location = useLocation();
   const sampleId = location.state.sample;
@@ -83,7 +84,16 @@ const SampleDetailExecutive = () => {
             />
             <Button
               onClick={() => {
+                Store.dispatch(
+                  sampleDelivered({
+                    id: sampleId,
+                    body: {
+                      deliveryDetails: del,
+                    },
+                  })
+                );
                 setOpen(false);
+                navigate("/SamplesExecutive");
               }}
               variant="contained"
             >

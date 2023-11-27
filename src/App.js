@@ -52,7 +52,7 @@ function App() {
   }, []);
 
   const theme = useMemo(() => createTheme(themeSettings()), []);
-
+  
   return user.loading ? (
     <Box
       style={{
@@ -66,19 +66,11 @@ function App() {
       <ThreeCircles height="200" width="300" radius="9" color="#FE6E0C" />
     </Box>
   ) : (
+
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              user.error ? (
-                <Navigate to="/login" replace />
-              ) : (
-                <Navigate to="/Dashboard" />
-              )
-            }
-          />
+        <Route path="/" element={user.error?<Navigate to="/login" replace />:<Navigate to="/Dashboard"/>} />
           <Route element={<Layout />}>
             <Route
               path="/Dashboard"
@@ -322,14 +314,11 @@ function App() {
               </UnAuthenticatedRoute>
             }
           />
-          <Route
-            path="/SamplesExecutive"
-            element={
-              <ExecutiveRoute>
-                <SamplesExecutive />
-              </ExecutiveRoute>
-            }
-          />
+          <Route path="/SamplesExecutive" element={
+            <ExecutiveRoute>
+            <SamplesExecutive 
+            />
+            </ExecutiveRoute>} />
           <Route
             path="/sampleDetailExecutive"
             element={

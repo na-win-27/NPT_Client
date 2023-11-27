@@ -1,1 +1,1 @@
-export const server="http://localhost:9002/api/v2"
+export const server="https://npt-backend-mp1x.vercel.app/api/v2"

@@ -147,7 +147,7 @@ const AddQuoteFormC = ({ mode, ...props }) => {
       Store.dispatch(editQuote(values));
         navigate("/quoteDetail?mode=edit");
     } else {
-      values.oppurtunity = oppurtunity ? oppurtunity._id : "";
+      values.oppurtunity = oppurtunity ? oppurtunity._id : null;
     values.date = new Date(values.date).toLocaleDateString();
     
     Store.dispatch(postQuote(values));

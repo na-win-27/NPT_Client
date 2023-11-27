@@ -83,17 +83,19 @@ const AddSampleForm = ({ mode, ...props }) => {
     props.initialValues
       ? { date: "", ...props.initialValues }
       : {
-          customer: oppurtunity ? oppurtunity.customer._id : "",
-          oppurtunity: oppurtunity ? oppurtunity._id : "",
+        date:"",
+          customer: oppurtunity ? oppurtunity.customer._id : null,
+          oppurtunity: oppurtunity ? oppurtunity._id : null,
           stage: "Sample",
           hangers: [
             {
               id: "",
-              colour: "",
+              colour: {},
               quantity: "",
             },
           ],
           description: oppurtunity ? oppurtunity.description : "",
+          addedBy:user._id,
           // buyerCategory: oppurtunity.buyerCategory,
         }
   );
@@ -115,6 +117,8 @@ const AddSampleForm = ({ mode, ...props }) => {
       Store.dispatch(editSample(values));
       navigate("/sampleDetail?mode=edit", { state: { sample: values._id } });
     } else {
+
+      console.log("Hi")
       if (user.role === "admin") {
         values.addedBy = user._id;
       }
@@ -144,7 +148,10 @@ const AddSampleForm = ({ mode, ...props }) => {
         validationSchema={(mode === "Edit")?(Yup.object()):sampleSchema}
         onSubmit={onSubmit}
       >
-        {({ values,touched,errors }) => (
+        {({ values,touched,errors }) => {
+          console.log(errors)
+          return(
+
           <Form noValidate>
             <Box
               display="grid"
@@ -184,9 +191,9 @@ const AddSampleForm = ({ mode, ...props }) => {
                     values.customer = val.value;
                   }}
                 />
-                {values.date === "" ? (
+              
                   <DatePickerField name="date" label="Enter Date" />
-                ) : null}
+               
                 <Field
                   style={e}
                   as={TextField}
@@ -254,7 +261,7 @@ const AddSampleForm = ({ mode, ...props }) => {
                               code={true}
                               name={`hangers[${index}].id`}
                               placeholder={
-                                values.hangers[index].id.code
+                                values.hangers[index].id
                                   ? values.hangers[index].id.code
                                   : "Enter Hanger"
                               }
@@ -305,7 +312,7 @@ const AddSampleForm = ({ mode, ...props }) => {
                         variant="outlined"
                         className="secondary"
                         onClick={() =>
-                          push({ code: "", colour: "", quantiy: "" })
+                          push({ code: {}, colour: {}, quantiy: "" })
                         }
                       >
                         Add Next Line
@@ -316,7 +323,7 @@ const AddSampleForm = ({ mode, ...props }) => {
               </Box>
             </Box>
           </Form>
-        )}
+        )}}
       </Formik>
     </Box>
   ) : null;
