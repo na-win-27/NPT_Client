@@ -191,8 +191,8 @@ const AddSampleForm = ({ mode, ...props }) => {
                     values.customer = val.value;
                   }}
                 />
-              
-                  <DatePickerField name="date" label="Enter Date" />
+              {!mode==="Edit"?
+                  <DatePickerField name="date" label="Enter Date" />:null}
                
                 <Field
                   style={e}
