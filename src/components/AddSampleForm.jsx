@@ -14,7 +14,7 @@ import { DatePickerField } from "./DatePickerField.jsx";
 import * as Yup from "yup";
 
 const sampleSchema = Yup.object().shape({
-  date: Yup.string().required(),
+  date:Yup.string().required(),
   customer: Yup.string().required("Customer Required"),
   addedBy: Yup.string().required("Added By is required"),
   hangers: Yup.array().of(
@@ -83,7 +83,7 @@ const AddSampleForm = ({ mode, ...props }) => {
     props.initialValues
       ? { date: "", ...props.initialValues }
       : {
-        date:"",
+        date:new Date(Date.now()).toLocaleDateString(),
           customer: oppurtunity ? oppurtunity.customer._id : null,
           oppurtunity: oppurtunity ? oppurtunity._id : null,
           stage: "Sample",
