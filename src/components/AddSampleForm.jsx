@@ -81,7 +81,7 @@ const AddSampleForm = ({ mode, ...props }) => {
 
   const [initialValues, setInitialValues] = React.useState(
     props.initialValues
-      ? { date: "", ...props.initialValues }
+      ? { ...props.initialValues }
       : {
         date:new Date(Date.now()).toLocaleDateString(),
           customer: oppurtunity ? oppurtunity.customer._id : null,
@@ -118,7 +118,6 @@ const AddSampleForm = ({ mode, ...props }) => {
       navigate("/sampleDetail?mode=edit", { state: { sample: values._id } });
     } else {
 
-      console.log("Hi")
       if (user.role === "admin") {
         values.addedBy = user._id;
       }
@@ -191,8 +190,7 @@ const AddSampleForm = ({ mode, ...props }) => {
                     values.customer = val.value;
                   }}
                 />
-              {!mode==="Edit"?
-                  <DatePickerField name="date" label="Enter Date" />:null}
+            
                
                 <Field
                   style={e}
