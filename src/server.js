@@ -1,0 +1,1 @@
+export const server="http://localhost:9002/api/v2"
