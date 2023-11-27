@@ -83,7 +83,7 @@ const AddSampleForm = ({ mode, ...props }) => {
     props.initialValues
       ? { ...props.initialValues }
       : {
-        date:new Date(Date.now()).toLocaleDateString(),
+        date:new Date(Date.now()),
           customer: oppurtunity ? oppurtunity.customer._id : null,
           oppurtunity: oppurtunity ? oppurtunity._id : null,
           stage: "Sample",
